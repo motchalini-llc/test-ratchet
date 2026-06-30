@@ -1,0 +1,50 @@
+name: 'Test Ratchet'
+description: 'Block new skipped / focused (.only) tests from sneaking your CI to green.'
+author: 'motchalini'
+branding:
+  icon: 'check-circle'
+  color: 'purple'
+
+inputs:
+  language:
+    description: 'python | typescript | auto (auto detects from pyproject.toml / tsconfig.json)'
+    required: false
+    default: 'auto'
+  paths:
+    description: 'Space-separated directories to scan for test files.'
+    required: false
+    default: '.'
+  baseline-skip:
+    description: 'Max allowed skipped/xfail test count. Fails if the count exceeds this.'
+    required: false
+    default: '0'
+  baseline-file:
+    description: 'Optional file defining SKIP_BASELINE (overrides the numeric input).'
+    required: false
+    default: ''
+  forbid-only:
+    description: 'Fail if any focused test (.only) is found. Focused tests silently make CI run only a subset.'
+    required: false
+    default: 'true'
+  test-command:
+    description: 'Optional command also run as part of the gate (e.g. "pnpm test" or "uv run pytest").'
+    required: false
+    default: ''
+  working-directory:
+    description: 'Directory to run in.'
+    required: false
+    default: '.'
+
+runs:
+  using: 'composite'
+  steps:
+    - shell: bash
+      env:
+        INPUT_LANGUAGE: ${{ inputs.language }}
+        INPUT_PATHS: ${{ inputs.paths }}
+        INPUT_BASELINE_SKIP: ${{ inputs.baseline-skip }}
+        INPUT_BASELINE_FILE: ${{ inputs.baseline-file }}
+        INPUT_FORBID_ONLY: ${{ inputs.forbid-only }}
+        INPUT_TEST_COMMAND: ${{ inputs.test-command }}
+        INPUT_WORKING_DIRECTORY: ${{ inputs.working-directory }}
+      run: bash "$GITHUB_ACTION_PATH/gate.sh"

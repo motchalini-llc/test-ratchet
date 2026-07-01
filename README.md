@@ -11,6 +11,16 @@ A green test run hides two cheats: tests that were **skipped** (`it.skip`, `@pyt
 
 It does **not** rerun your tests. It catches what a passing test run can't show you: a test silenced or narrowed instead of fixed.
 
+## The Ratchet family
+
+Three zero-dependency PR gates, each blocking a different way a green check gets faked:
+
+| Action | Blocks the cheat |
+|---|---|
+| [Type Ratchet](https://github.com/marketplace/actions/type-ratchet) | type escape hatches — `any` / `as any` / `# type: ignore` |
+| [Test Ratchet](https://github.com/marketplace/actions/test-ratchet) **← this repo** | disabled tests — `it.skip` / `.only` / `@pytest.mark.skip` |
+| [Suppress Ratchet](https://github.com/marketplace/actions/suppress-ratchet) | linter suppressions — `eslint-disable` / `biome-ignore` / `# noqa` |
+
 ## Usage
 
 Add one step to a PR workflow:

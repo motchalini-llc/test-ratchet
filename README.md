@@ -11,6 +11,10 @@ A green test run hides two cheats: tests that were **skipped** (`it.skip`, `@pyt
 
 It does **not** rerun your tests. It catches what a passing test run can't show you: a test silenced or narrowed instead of fixed.
 
+**Why now:** AI coding agents are very good at making CI green — and the fastest route to green is `it.skip`, not a fix. A reviewer can miss one skipped test in a 400-line diff; a counter can't. No AI, no SaaS, no config: the whole gate is [one bash script](gate.sh) you can read.
+
+> 📖 Launch article: [Your AI makes CI green by cheating. I built three GitHub Actions to stop it.](https://dev.to/motchalini/your-ai-makes-ci-green-by-cheating-i-built-three-github-actions-to-stop-it-4pal) · [日本語版 (Zenn)](https://zenn.dev/motchalini/articles/99f743d923fb54)
+
 ## The Ratchet family
 
 Three zero-dependency PR gates, each blocking a different way a green check gets faked:

@@ -1,5 +1,5 @@
 name: 'Test Ratchet'
-description: 'Block new skipped / focused (.only) tests from sneaking your CI to green.'
+description: 'Fail PRs that skip tests (it.skip, @pytest.mark.skip) or focus with .only. Zero-config guardrail for AI-written code.'
 author: 'motchalini'
 branding:
   icon: 'check-circle'
